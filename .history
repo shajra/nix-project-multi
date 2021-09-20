@@ -1,0 +1,12 @@
+:q
+~/.config/nix-project/multi.dhall : ./nix/config-schema.dhall 
+:q
+~/.config/nix-project/multi.dhall : ./nix/config-schema.dhall 
+~/.config/nix-project/multi.dhall : ./nix/config-schema.dhall 
+~/.config/nix-project/multi.dhall : ./nix/config-schema.dhall 
+~/.config/nix-project/multi.dhall : ./nix/config-schema.dhall 
+:q
+~/.config/nix-project/multi.dhall : ./nix/config-schema.dhall 
+:q
+~/.config/nix-project/multi.dhall : ./nix/config-schema.dhall 
+~/.config/nix-project/multi.dhall 

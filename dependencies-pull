@@ -1,0 +1,12 @@
+#!/bin/sh -eu
+
+cd "$(dirname "$0")"
+
+nix run \
+    --ignore-environment \
+    --file 'nix' \
+    distribution.nix-project-multi \
+    --command \
+    nix-project-multi \
+    pull \
+    "$@"

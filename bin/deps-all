@@ -1,0 +1,18 @@
+#!/bin/sh -eu
+
+
+NIX_EXPR="$(cat - <<EOF
+with builtins;
+foldl' (acc: path: acc // (fromJSON (readFile path))) {} [
+    /home/tnks/src/shajra/bluos-nix/nix/external/sources.json
+    /home/tnks/src/shajra/direnv-nix-lorelei/nix/external/sources.json
+    /home/tnks/src/shajra/haskell-hls-nix/nix/external/sources.json
+    /home/tnks/src/shajra/haskell-tags-nix/nix/external/sources.json
+    /home/tnks/src/shajra/nix-project/nix/external/sources.json
+    /home/tnks/src/shajra/shajra-keyboards/nix/external/sources.json
+    /home/tnks/src/shajra/shajra-provisioning/external/sources.json
+]
+EOF
+)"
+
+nix eval --json "($NIX_EXPR)" | jq .

@@ -1,0 +1,14 @@
+#+link: cachix https://cachix.org
+#+link: github-actions https://github.com/shajra/nix-project-multi/actions
+#+link: github-token https://github.com/settings/tokens
+#+link: niv https://github.com/nmattia/niv
+#+link: nix https://nixos.org/nix
+#+link: nix-darwin https://daiderd.com/nix-darwin
+#+link: nix-env https://nixos.org/nix/manual/#sec-nix-env
+#+link: nix-expr https://nixos.org/nix/manual/#ch-expression-language
+#+link: nix-install https://nixos.org/nix/manual/#chap-installation
+#+link: nix-learn https://nixos.org/learn.html
+#+link: nixos https://nixos.org
+#+link: nixpkgs https://github.com/NixOS/nixpkgs
+#+link: nix-project https://github.com/shajra/nix-project
+#+link: nix-tutorial https://github.com/shajra/example-nix/tree/master/tutorials/0-nix-intro

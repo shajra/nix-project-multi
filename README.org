@@ -1,0 +1,245 @@
+#+title: Nix-based Multi-Project Dependency Management
+#+setupfile: doc/links.org
+
+[[https://github.com/shajra/nix-project-multi/actions][https://github.com/shajra/nix-project-multi/workflows/CI/badge.svg]]
+
+* Org-mode setup :noexport:
+
+** Formatting help
+
+This snippet can be used as a post-processing step to crop down the results from
+an evaluation of a source code block.
+
+#+name: crop
+#+begin_src emacs-lisp :var text="" :var first-n=5 :var last-n=5 :results silent
+(let* ((ls         (split-string text "\n"))
+       (first-ls   (-take first-n ls))
+       (rest-first (-drop first-n ls))
+       (rest-last  (-drop-last (+ 1 last-n) rest-first))
+       (last-ls    (-take-last (+ 1 last-n) rest-first)))
+  (string-join
+   (if rest-last
+       (append first-ls '("…") last-ls)
+     (append first-ls last-ls))
+   "\n"))
+#+end_src
+
+** Setup action
+
+The following helps (using Noweb) set up Nix environment variables for source
+block evaluation.
+
+#+name: nix-init
+#+begin_src sh :eval no
+export NIX_PROFILE=$(pwd)/nix-profile
+export NIX_PAGER=cat
+export PATH="$NIX_PROFILE/bin:$PATH"
+#+end_src
+
+Next we perform some side-effects to set up the evaluation of the whole
+document.
+
+#+name: cleanup
+#+begin_src sh :results output silent :noweb yes
+<<nix-init>>
+rm --force result*
+rm --force "$NIX_PROFILE"*
+#+end_src
+
+This is just a hack to deal with the fact that we never know what directory a
+session will start in, so we need a way to calculate the PWD to jump to it.
+
+#+name: pwd
+#+begin_src sh :results output silent
+echo cd "$(pwd)"
+#+end_src
+
+This begins a session with environment variables initialized.
+
+#+name: session-init
+#+begin_src sh :session env :results output silent :noweb yes
+<<pwd()>>
+<<nix-init>>
+#+end_src
+
+* About this project
+
+This project helps centralize dependency management for [[nix][Nix]]-based projects that
+use [[niv][Niv]] for keeping dependencies updated.
+
+** Assumed toolchain
+
+There are many motivations to manage dependencies with Nix. It offers an
+exceptional precision, and Nix can manage dependencies for a variety of
+programming language ecosystems. See the [[file:doc/nix.org][provided documentation on Nix]] for more
+information.
+
+All dependencies are assumed to be managed for Nix by [[niv][Niv]]. This means that all
+projects should have Niv's =sources.json= file. These are what are managed by
+this project.
+
+** Problem solved
+
+[[niv][Niv]] can update all dependencies for a single project, or a single dependency at
+a time. But sometimes it's nice to pin all projects to the same version of a
+dependency. With just Niv, as you move from upgrading one project to another,
+you can easily pull in different versions at different times. Aligning versions
+of dependencies across projects isn't strictly necessary, but can make reasoning
+about different versions of the same dependency easier.
+
+This project provides two scripts:
+- =dependencies-pull=, which collects all dependencies from specified projects'
+  =sources.json= files into a central project's =sources.json= file.
+- =dependencies-push=, which overrides any dependencies listed in specified
+  project's =source.json= files with dependencies from the central project's
+  =sources.json= file.
+
+This project also happens to be my personal centralized repository for all my
+projects, which is why its =sources.json= has many more dependencies than used
+within this project.
+
+* Workflow
+
+This is work in progress, and may refine as put into more practice. The idea is
+to update all project dependencies at once to pinned versions. And then go
+through each project, seeing that everything still works, and releasing the new
+version of them with updated dependencies.
+
+1. Call =dependencies-pull= to get all dependencies centralized.
+2. Call =dependencies-update= to update all dependencies to their latest
+   versions.
+3. Call =dependencies-push= to push pinned versions out to all managed projects.
+4. Work on a project, call it =some-project=, and publish a new version.
+5. Call ~dependencies-update some-project~ in my central project, to pull
+   in the new dependency without changing other pinned dependencies.
+6. Call =dependencies-push= to push it out to other projects that might depend
+   on =some-project=.
+7. Repeat steps 4 through 6 as necessary until everything is up-to-date.
+8. On some later day, start all over again at step 1. The cycle of life
+   continues.
+
+* Usage
+
+This project should work with either GNU/Linux or MacOS operating systems. Just
+follow the following steps.
+
+#+include: "doc/nix.org::*Nix package manager setup"
+
+#+include: "doc/nix.org::*Cache setup"
+
+** Manage projects with Niv
+
+Using [[niv][Niv]] is not covered by this documentation. I use my own [[nix-project][Nix-project]]
+project, which delegates heavily to Niv. Each of these projects have
+instructions on how to manage dependencies for a Nix-based project, which should
+end up with a =sources.json= file listing out all dependencies.
+
+One of the projects you create will be where dependencies are centralized, and
+need not have any code, just dependencies managed by Niv.
+
+** Configuration
+
+Create a YAML file at =~/.config/nix-project/multi.yaml=, which should have two
+top-level keys =packages= and =central=. Managed projects' =source.json=
+filepaths are set in an array in =packages=. The central project's =source.json=
+filepath is set in =central=. Here's an example:
+
+#+begin_src yaml :eval no
+packages:
+- /home/you/src/your-great-project/nix/sources.json
+- /home/you/src/your-greater-project/nix/sources.json
+central: /home/you/src/your-central-deps/nix/sources.json
+#+end_src
+
+** Installing scripts
+
+Once configured, you can use =dependencies-pull= and =dependencies-push=
+directly from this repository.
+
+Both of these scripts delegate to a single script =nix-project-multi=, which you
+can install with =nix-env= if you like. You can look at =dependencies-pull= and
+=dependencies-push= to see that all they do is call =nix-project-multi= with
+either a =pull= or =push= argument respectively.
+
+Here's how to install =nix-project-multi=:
+
+#+name: nix-env-install
+#+begin_src sh :session env :results output :exports both :post crop(text=*this*, first-n=1, last-n=3)
+nix-env --install --file . --attr nix-project-multi 2>&1
+#+end_src
+
+#+RESULTS: nix-env-install
+: installing 'nix-project-multi'
+
+If you have =~/.nix-profile/bin= on your =PATH=, you should be able to call
+=nix-project-multi=.
+
+** Detailed usage
+
+We can look at the script usage from the =--help= option for more details:
+
+#+name: help
+#+begin_src sh :session env :results output :exports both
+nix-project-multi --help
+#+end_src
+
+#+RESULTS: help
+#+begin_example
+USAGE: nix-project-multi MODE [OPTION]... [PROJECT_SOURCES_JSON]...
+
+DESCRIPTION:
+
+    Manage dependencies for many projects from a centralized
+    project.  The dependencies must be in the JSON format of
+    the Niv tool.
+
+MODES
+
+    pull   pull dependencies into centralized project
+    push   push dependencies out to managed projects
+
+OPTIONS:
+
+    --help             print this help message
+    -C --config  PATH  path to configuration file to use
+    -c --central PATH  centralized sources JSON
+    -n --dry-run       print files affects, but don't run
+#+end_example
+
+** GitHub rate limiting of Niv calls
+
+Many dependencies managed by Niv may come from GitHub. GitHub will rate limit
+anonymous API calls to 60/hour, which is not a lot. To increase this limit, you
+can make a [[github-token][personal access token]] with GitHub. Then write the generated token
+value in the file =~/.config/nix-project/github.token=. Make sure to restrict
+the permissions of this file appropriately.
+
+* Release
+
+The "main" branch of the repository on GitHub has the latest released version
+of this code. There is currently no commitment to either forward or backward
+compatibility.
+
+"user/shajra" branches are personal branches that may be force-pushed to. The
+"main" branch should not experience force-pushes and is recommended for
+general use.
+
+* License
+
+All files in this "nix-project" project are licensed under the terms of GPLv3 or
+(at your option) any later version.
+
+Please see the [[./COPYING.md][./COPYING.md]] file for more details.
+
+* Contribution
+
+Feel free to file issues and submit pull requests with GitHub.
+
+There is only one author to date, so the following copyright covers all files in
+this project:
+
+Copyright © 2021 Sukant Hajra
+
+* Org-mode teardown :noexport:
+
+#+call: cleanup()
