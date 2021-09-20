@@ -225,7 +225,7 @@ report_plan()
 
 pull()
 {
-    jq --sort-keys --slurp \
+    jq --indent 4 --sort-keys --slurp \
         'reduce .[] as $p ({}; . + $p)' \
         "''${PROJECTS[@]}" \
         >"$CENTRAL"
@@ -235,7 +235,7 @@ push()
 {
     for p in "''${PROJECTS[@]}"
     do
-        jq --sort-keys --slurp '
+        jq --indent 4 --sort-keys --slurp '
               .[0] as $project
             | .[1] as $central
             | $central
