@@ -104,10 +104,10 @@
         "homepage": null,
         "owner": "shajra",
         "repo": "direnv-nix-lorelei",
-        "rev": "fffccbf468d0ec473990557bc35478a675ec8663",
-        "sha256": "03b6rz2pk1sah1s30az7crkhr2nr2lz22dj6ccm68si37zfiga8z",
+        "rev": "62c6b5278218d563c630bf0d8bd440a687848393",
+        "sha256": "1kf5igkqlnmifg4mrd59hvc1jnhmjq84zb6cpvsh1c27mzbzlsxv",
         "type": "tarball",
-        "url": "https://github.com/shajra/direnv-nix-lorelei/archive/fffccbf468d0ec473990557bc35478a675ec8663.tar.gz",
+        "url": "https://github.com/shajra/direnv-nix-lorelei/archive/62c6b5278218d563c630bf0d8bd440a687848393.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "emacs-overlay": {
