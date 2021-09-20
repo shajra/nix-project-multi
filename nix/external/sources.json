@@ -134,6 +134,30 @@
         "url": "https://github.com/PatrickF1/fzf.fish/archive/176c8465b0fad2d5c30aacafff6eb5accb7e3826.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
+    "haskell-hls-nix": {
+        "branch": "main",
+        "description": "Nix builds of Haskell Language Server",
+        "homepage": null,
+        "owner": "shajra",
+        "repo": "haskell-hls-nix",
+        "rev": "ff32dad417c524975b874b781656156a4b5c6c34",
+        "sha256": "1161xfwbng88imj3afb8l68l3sah77vgckvf9qr3cls037h22hv0",
+        "type": "tarball",
+        "url": "https://github.com/shajra/haskell-hls-nix/archive/ff32dad417c524975b874b781656156a4b5c6c34.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "haskell-tags-nix": {
+        "branch": "main",
+        "description": "Generate a tags file for Haskell projects with Nix",
+        "homepage": null,
+        "owner": "shajra",
+        "repo": "haskell-tags-nix",
+        "rev": "1d5ae75ff8e27c5a305b359368a4a017994360c2",
+        "sha256": "183iw1b6iyabxzx26ys9dxg1gkm1rnskbqpxbngvvpiv2jpjsv7c",
+        "type": "tarball",
+        "url": "https://github.com/shajra/haskell-tags-nix/archive/1d5ae75ff8e27c5a305b359368a4a017994360c2.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
     "haskell.nix": {
         "branch": "master",
         "description": "Alternative Haskell Infrastructure for Nixpkgs",
@@ -244,30 +268,6 @@
         "sha256": "0mifv59hqs35c91y3v3rkizy7nnzpsd1n8waz1lnbrbf4r9xmhq3",
         "type": "tarball",
         "url": "https://github.com/LnL7/nix-darwin/archive/e1a3f7292f085fd588d11f94ed0f47968c16df0c.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
-    },
-    "nix-haskell-hls": {
-        "branch": "main",
-        "description": "Nix builds of Haskell Language Server",
-        "homepage": null,
-        "owner": "shajra",
-        "repo": "nix-haskell-hls",
-        "rev": "ff32dad417c524975b874b781656156a4b5c6c34",
-        "sha256": "1161xfwbng88imj3afb8l68l3sah77vgckvf9qr3cls037h22hv0",
-        "type": "tarball",
-        "url": "https://github.com/shajra/nix-haskell-hls/archive/ff32dad417c524975b874b781656156a4b5c6c34.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
-    },
-    "nix-haskell-tags": {
-        "branch": "main",
-        "description": "Generate a tags file for Haskell projects with Nix",
-        "homepage": null,
-        "owner": "shajra",
-        "repo": "nix-haskell-tags",
-        "rev": "b3ab541b75f31708b51da7583a06654733170905",
-        "sha256": "00a5gw8p1w4dvnyq45fw4i6wg4rpx308kjmww4cqni66wx6np0l5",
-        "type": "tarball",
-        "url": "https://github.com/shajra/nix-haskell-tags/archive/b3ab541b75f31708b51da7583a06654733170905.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nix-project": {
