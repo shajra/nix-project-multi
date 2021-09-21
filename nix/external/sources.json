@@ -140,10 +140,10 @@
         "homepage": null,
         "owner": "shajra",
         "repo": "haskell-hls-nix",
-        "rev": "ff32dad417c524975b874b781656156a4b5c6c34",
-        "sha256": "1161xfwbng88imj3afb8l68l3sah77vgckvf9qr3cls037h22hv0",
+        "rev": "01225a69e60e75eec43cb008e56d4cd2dede510d",
+        "sha256": "172qlvay4ifjx9fwnj137sqj95ll7bmg2libhkczsvdxm330irbn",
         "type": "tarball",
-        "url": "https://github.com/shajra/haskell-hls-nix/archive/ff32dad417c524975b874b781656156a4b5c6c34.tar.gz",
+        "url": "https://github.com/shajra/haskell-hls-nix/archive/01225a69e60e75eec43cb008e56d4cd2dede510d.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "haskell-tags-nix": {
