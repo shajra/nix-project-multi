@@ -152,10 +152,10 @@
         "homepage": null,
         "owner": "shajra",
         "repo": "haskell-tags-nix",
-        "rev": "716298757196695f78c55f7824f1a1f4dbf05c81",
-        "sha256": "1209jv0qb6fh54dk01hwzzklkfpb5n2c48rwkzbp9nk8caxims5s",
+        "rev": "37ddb5c73065d59261ee98d5388e56dc331e8115",
+        "sha256": "0jafbr4wwd2m8hv6madj1havm1m3l260b3v97smc0n83zr444wzm",
         "type": "tarball",
-        "url": "https://github.com/shajra/haskell-tags-nix/archive/716298757196695f78c55f7824f1a1f4dbf05c81.tar.gz",
+        "url": "https://github.com/shajra/haskell-tags-nix/archive/37ddb5c73065d59261ee98d5388e56dc331e8115.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "haskell.nix": {
