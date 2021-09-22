@@ -361,7 +361,7 @@
         "owner": "qmk",
         "repo": "qmk_firmware",
         "rev": "574b6734afb6ec7073f6fb816dd454f03b7eb26f",
-        "sha256": "1875flb2niq2my3aqwiwgw7hddw6np241jpyaizfkj83nmllxsd8",
+        "sha256": "04nq5wwm1vlbc1svf19ic464yfk5vd0278a5k7xwfna4ripppp2g",
         "type": "tarball",
         "url": "https://github.com/qmk/qmk_firmware/archive/574b6734afb6ec7073f6fb816dd454f03b7eb26f.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
